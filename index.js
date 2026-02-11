@@ -1,17 +1,18 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
-const usersRoutes = require("./routes/usersRoutes");
-const customersRoutes = require("./routes/customersRoutes");
-const customerServicesRoutes = require("./routes/customerServiceRoutes");
-const CSMessagesRoutes = require("./routes/CSMessagesRoutes");
+const users = require("./src/routes/usersRoutes");
+const customersRoutes = require("./src/routes/customersRoutes");
+const customerServicesRoutes = require("./src/routes/customerServiceRoutes");
+const CSMessagesRoutes = require("./src/routes/CSMessagesRoutes");
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-app.use("/api/users", usersRoutes);
+console.log("registrando /users");
+app.use("/api/users", users);
 app.use("/api/customers", customersRoutes);
 app.use("/api/customerServices", customerServicesRoutes);
 app.use("/api/messages", CSMessagesRoutes);
