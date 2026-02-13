@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/usersController");
-const { get } = require("mongoose");
 
 router.post("/", usersController.createUser);
 router.get("/", usersController.getAllUsers);

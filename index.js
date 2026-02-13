@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const users = require("./src/routes/usersRoutes");
-const customersRoutes = require("./src/routes/customersRoutes");
+const customers = require("./src/routes/customersRoutes");
 const customerServicesRoutes = require("./src/routes/customerServiceRoutes");
 const CSMessagesRoutes = require("./src/routes/CSMessagesRoutes");
 
@@ -11,9 +11,9 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-console.log("registrando /users");
+
 app.use("/api/users", users);
-app.use("/api/customers", customersRoutes);
+app.use("/api/customers", customers);
 app.use("/api/customerServices", customerServicesRoutes);
 app.use("/api/messages", CSMessagesRoutes);
 

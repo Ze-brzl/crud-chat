@@ -8,6 +8,9 @@
         - Isso fica no service,
       - Validar se e-mail já está cadastrado,
       - Validar a existencia do cliente que está sendo cadastrado (via ssn ou nome, validando status)
+      - Formatar o SSN do customer
+      - Validador de SSN
+        - Analisar a possibilidade, considerando padrão de documentos internacionais
 
 - Atendimentos:
   - Busca por:
