@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/api/users", users);
 app.use("/api/customers", customers);
-app.use("/api/customerServices", customerServicesRoutes);
+app.use("/api/customer-services", customerServicesRoutes);
 app.use("/api/messages", CSMessagesRoutes);
 
 const PORT = process.env.PORT || 5000;
