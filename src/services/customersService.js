@@ -32,7 +32,7 @@ const customersService = {
       return getByName;
     }
     throw new Error("Cliente não encontrado");
-  }, //Ajustar
+  },
 
   updateCustomer: async (id, updateData) => {
     const newId = new mongoose.Types.ObjectId(id);
