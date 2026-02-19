@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const users = require("./src/routes/usersRoutes");
 const customers = require("./src/routes/customersRoutes");
 const customerServicesRoutes = require("./src/routes/customerServiceRoutes");
-const CSMessagesRoutes = require("./src/routes/CSMessagesRoutes");
+const CustomerServiceMessagesRoutes = require("./src/routes/CustomerServiceMessageRoutes");
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/api/users", users);
 app.use("/api/customers", customers);
 app.use("/api/customer-services", customerServicesRoutes);
-app.use("/api/messages", CSMessagesRoutes);
+app.use("/api/messages", CustomerServiceMessagesRoutes);
 
 const PORT = process.env.PORT || 5000;
 

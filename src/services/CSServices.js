@@ -55,17 +55,17 @@ const CSServices = {
 
   updateCustomerService: async (id, updateData) => {
     const newId = new mongoose.Types.ObjectId(id);
-    if (!updateData.status) {
-      throw new Error("Somente o status pode ser editado");
+    if (updateData.status) {
+      const updateCustomerService = await customerServices.findByIdAndUpdate(
+        newId,
+        updateData,
+        {
+          new: true,
+        },
+      );
+      return updateCustomerService;
     }
-    const updateCustomerService = await customerServices.findByIdAndUpdate(
-      newId,
-      updateData,
-      {
-        new: true,
-      },
-    );
-    return updateCustomerService;
+    throw new Error("Somente o status pode ser editado");
   },
 };
 module.exports = CSServices;
