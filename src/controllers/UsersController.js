@@ -1,44 +1,44 @@
-const usersService = require("../services/usersService");
+const UsersService = require("../services/UsersService");
 
-exports.createUser = async (req, res) => {
+exports.CreateUser = async (req, res) => {
   try {
-    const newUser = await usersService.createUser(req.body);
+    const newUser = await UsersService.CreateUser(req.body);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-exports.getAllUsers = async (req, res) => {
+exports.GetAllUsers = async (req, res) => {
   try {
-    const getUsers = await usersService.getAllUsers();
+    const getUsers = await UsersService.GetAllUsers();
     res.status(201).json(getUsers);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-exports.getUserById = async (req, res) => {
+exports.GetUserById = async (req, res) => {
   try {
-    const getById = await usersService.getUserById(req.params);
+    const getById = await UsersService.GetUserById(req.params);
     res.status(201).json(getById);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-exports.getUserByName = async (req, res) => {
+exports.GetUserByName = async (req, res) => {
   try {
-    const getByName = await usersService.getUserByName(req.body);
+    const getByName = await UsersService.GetUserByName(req.body);
     res.status(201).json(getByName);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.UpdateUser = async (req, res) => {
   try {
-    const update = await usersService.updateUser(req.params.id, req.body);
+    const update = await UsersService.UpdateUser(req.params.id, req.body);
     res.status(201).json(update);
   } catch (error) {
     res.status(400).json({ message: error.message });

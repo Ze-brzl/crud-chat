@@ -1,31 +1,31 @@
 const { default: mongoose } = require("mongoose");
-const users = require("../models/users");
+const Users = require("../models/Users");
 
-const usersService = {
-  createUser: async (userData) => {
-    const existingUser = await users.findOne({
+const UsersService = {
+  CreateUser: async (userData) => {
+    const existingUser = await Users.findOne({
       emailAdress: userData.emailAdress,
     });
     if (existingUser) {
       throw new Error("E-mail já cadastrado");
     }
-    const user = await users.insertOne(userData);
+    const user = await Users.insertOne(userData);
     return user;
   },
 
-  getAllUsers: async () => {
-    const allUsers = await users.find({});
+  GetAllUsers: async () => {
+    const allUsers = await Users.find({});
     return allUsers;
   },
 
-  getUserById: async (id) => {
+  GetUserById: async (id) => {
     const newId = new mongoose.Types.ObjectId(id);
-    const userById = await users.findOne({ _id: newId });
+    const userById = await Users.findOne({ _id: newId });
     return userById;
   },
 
-  getUserByName: async (query) => {
-    const userByName = await users.find({
+  GetUserByName: async (query) => {
+    const userByName = await Users.find({
       name: { $regex: query.name, $options: "i" },
     });
     if (!userByName) {
@@ -34,10 +34,10 @@ const usersService = {
     return userByName;
   },
 
-  updateUser: async (id, updateData) => {
+  UpdateUser: async (id, updateData) => {
     const newId = new mongoose.Types.ObjectId(id);
     if (updateData?.emailAddress) {
-      const existingUser = await users.findOne({
+      const existingUser = await Users.findOne({
         emailAddress: updateData.emailAddress,
         _id: { $ne: newId },
       });
@@ -45,11 +45,11 @@ const usersService = {
         throw new Error("E-mail já cadastrado");
       }
     }
-    const updateUser = await users.findByIdAndUpdate(newId, updateData, {
+    const updateUser = await Users.findByIdAndUpdate(newId, updateData, {
       new: true,
     });
     return updateUser;
   },
 };
 
-module.exports = usersService;
+module.exports = UsersService;

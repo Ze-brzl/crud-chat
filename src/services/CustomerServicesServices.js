@@ -1,22 +1,22 @@
 const { default: mongoose } = require("mongoose");
-const customerServices = require("../models/customerService");
-const users = require("../models/users");
-const customers = require("../models/customers");
+const CustomerServices = require("../models/CustomerService");
+const Users = require("../models/Users");
+const Customers = require("../models/Customers");
 
-const CSServices = {
-  createCustomerService: async (customerServiceData) => {
+const CustomerServicesService = {
+  CreateCustomerService: async (customerServiceData) => {
     const newIdUser = new mongoose.Types.ObjectId(customerServiceData.idUser);
     const newIdCustomer = new mongoose.Types.ObjectId(
       customerServiceData.idCustomer,
     );
     const userStatusValidator = (
-      await users.find(
+      await Users.find(
         { _id: customerServiceData.idUser },
         { _id: 0, status: 1 },
       )
     ).toString();
     const customerStatusValidator = (
-      await customers.find(
+      await Customers.find(
         { _id: customerServiceData.idCustomer },
         { _id: 0, status: 1 },
       )
@@ -26,7 +26,7 @@ const CSServices = {
     } else if (customerStatusValidator.includes("inactive")) {
       throw new Error("Cliente inativo");
     }
-    const createCustomer = await customerServices.insertOne({
+    const createCustomer = await CustomerServices.insertOne({
       idUser: newIdUser,
       idCustomer: newIdCustomer,
       status: customerServiceData.status,
@@ -34,29 +34,29 @@ const CSServices = {
     return createCustomer;
   },
 
-  getAllCustomerService: async () => {
-    const allCustomerServices = await customerServices.find();
+  GetAllCustomerService: async () => {
+    const allCustomerServices = await CustomerServices.find();
     return allCustomerServices;
   },
 
-  getCustomerServiceByStatus: async (queryStatus) => {
+  GetCustomerServiceByStatus: async (queryStatus) => {
     if (!queryStatus.status) {
       throw new Error("Somente consultas pelo campo status são permitidas");
     }
-    const getByStatus = await customerServices.find(queryStatus);
+    const getByStatus = await CustomerServices.find(queryStatus);
     return getByStatus;
   },
 
-  getCustomerServiceById: async (id) => {
+  GetCustomerServiceById: async (id) => {
     const newId = new mongoose.Types.ObjectId(id);
-    const getById = await customerServices.findById({ _id: newId });
+    const getById = await CustomerServices.findById({ _id: newId });
     return getById;
   },
 
-  updateCustomerService: async (id, updateData) => {
+  UpdateCustomerService: async (id, updateData) => {
     const newId = new mongoose.Types.ObjectId(id);
     if (updateData.status) {
-      const updateCustomerService = await customerServices.findByIdAndUpdate(
+      const updateCustomerService = await CustomerServices.findByIdAndUpdate(
         newId,
         updateData,
         {
@@ -68,4 +68,4 @@ const CSServices = {
     throw new Error("Somente o status pode ser editado");
   },
 };
-module.exports = CSServices;
+module.exports = CustomerServicesService;
